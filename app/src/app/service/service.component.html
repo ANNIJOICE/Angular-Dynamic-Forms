@@ -3,5 +3,11 @@
     <div *ngFor="let field of fields">
         <label>{{field.label ? field.label : ''}}</label>
         <input [type]="field.type" [formControlName]="field.fieldName"/>
+
+        <ng-container [ngSwitch]="field.type">
+            <app-radio *ngSwitchCase="'radio'" [formName]="registerForm" [field]="field"></app-radio>
+            <app-checkbox *ngSwitchCase="'checkbox'" [formName]="registerForm" [field]="field"></app-checkbox>
+        </ng-container>
     </div>
+
 </form>

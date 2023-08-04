@@ -9,13 +9,18 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiInterceptor } from 'src/app/shared/api.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ServiceComponent } from './service/service.component';
+import { RadioComponent } from './service/radio/radio.component';
+import { CheckboxComponent } from './service/checkbox/checkbox.component';
+import { DetailsService } from './service/details.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ServiceComponent
+    ServiceComponent,
+    RadioComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +30,7 @@ import { ServiceComponent } from './service/service.component';
     HttpClientModule
   ],
   providers: [
+    DetailsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

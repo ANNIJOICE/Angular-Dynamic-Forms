@@ -3,6 +3,7 @@ export const LOGIN = {
 }
 
 export const MODEL = {
+  food: {
     firstname: {
       type: "text",
       value: "",
@@ -18,6 +19,8 @@ export const MODEL = {
       value: "",
       label: "Address",
     },
+  },
+  room: {
     age: {
       type: "number",
       value: "",
@@ -28,4 +31,30 @@ export const MODEL = {
       value: "",
       label: "Birthday",
     },
-  };
+    newsletterIn: {
+      label: "Suscribe to newsletter",
+      value: "email",
+      type: "checkbox"
+    },
+    typeBussines: {
+      label: "Bussines Type",
+      value: "premium",
+      type: "radio",
+      options: [
+        {
+          label: "Enterprise",
+          value: "1500",
+        },
+        {
+          label: "Home",
+          value: "6",
+        },
+        {
+          label: "Personal",
+          value: "1",
+        },
+      ],
+    },
+  }
+
+};

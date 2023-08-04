@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MODEL } from '../shared/util/constants';
+import { DetailsService } from './details.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-service',
@@ -11,17 +13,27 @@ export class ServiceComponent implements OnInit {
   fields: any = [];
   model: Record<string, any> = MODEL;
   registerForm!: FormGroup;
-  // registerForm: FormGroup = new FormGroup({
-  //     'name': new FormControl(''),
-  //     'lastName': new FormControl(''),
-  //     'address': new FormControl(''),
-  //     'age': new FormControl(''),
-  // });
 
-  constructor() {}
+  constructor(private detailsSerice: DetailsService, private router: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.router.queryParams.subscribe((res: any) => {
+      console.log(res)
+      if(res.name) {
+        this.model = this.model[res.name];
+      }
+    })
     this.buildForm();
+    this.selectedService();
+  }
+
+  selectedService() {
+    this.detailsSerice.getSelectedService().subscribe((res) => {
+      console.log("JOICEEeeeee", res)
+    });
+
+    const service = this.detailsSerice.getSelectedService();
+    console.log(service)
   }
 
   buildForm(): void {
