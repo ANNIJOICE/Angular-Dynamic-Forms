@@ -1,0 +1,7 @@
+<h1>Register</h1>
+<form [formGroup]="registerForm">
+    <div *ngFor="let field of fields">
+        <label>{{field.label ? field.label : ''}}</label>
+        <input [type]="field.type" [formControlName]="field.fieldName"/>
+    </div>
+</form>
