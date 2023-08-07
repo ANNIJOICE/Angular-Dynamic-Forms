@@ -2,7 +2,13 @@
 <form [formGroup]="registerForm">
     <div *ngFor="let field of fields">
         <label>{{field.label ? field.label : ''}}</label>
-        <input [type]="field.type" [formControlName]="field.fieldName"/>
+        <input [type]="field.type" [formControlName]="field.fieldName" />
+        <div *ngIf="registerForm.controls[field.fieldName].invalid && (registerForm.controls[field.fieldName].dirty || registerForm.controls[field.fieldName].touched)"
+            class="alert">
+            <div *ngIf="registerForm.controls[field.fieldName].errors?.['required']">
+                * {{field.fieldName}}
+            </div>
+        </div>
 
         <ng-container [ngSwitch]="field.type">
             <app-radio *ngSwitchCase="'radio'" [formName]="registerForm" [field]="field"></app-radio>

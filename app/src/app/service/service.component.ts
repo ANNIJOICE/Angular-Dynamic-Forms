@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MODEL } from '../shared/util/constants';
 import { DetailsService } from './details.service';
 import { ActivatedRoute } from '@angular/router';
@@ -48,10 +48,29 @@ export class ServiceComponent implements OnInit {
       console.log(field);
 
       const fieldProps = this.model[field];
-      formControlFields[field] = new FormControl(fieldProps.value);
+      const validators = this.addValidator(fieldProps.rules)
+      formControlFields[field] = new FormControl(fieldProps.value, validators);
       this.fields.push({...fieldProps, fieldName: field});
     }
     return formControlFields;
     console.log(formControlFields);
+  }
+
+  addValidator(rules: any): any {
+    if(!rules) {
+      return []
+    } else {
+      const validators = Object.keys(rules).map((rule) => {
+        switch (rule) {
+          case "required":
+            return Validators.required;
+            //add more cases for the future.
+          default:
+            return [];
+        }
+      });
+      return validators;
+    }
+
   }
 }

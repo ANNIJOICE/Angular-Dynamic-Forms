@@ -8,6 +8,9 @@ export const MODEL = {
       type: "text",
       value: "",
       label: "FirstName",
+      rules: {
+        required: true
+      }
     },
     lastname: {
       type: "text",
